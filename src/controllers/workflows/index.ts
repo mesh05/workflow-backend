@@ -1,13 +1,20 @@
 import { Request, Response } from "express";
+import workflowService from "../../services/workflows";
 
-function getAllWorkflows(req: Request, res: Response) {
-  // DB call to get all workflows handled by a service
-  res.send("All workflows");
+async function getAllWorkflows(req: Request, res: Response) {
+  const result = await workflowService.getAllWorkflows();
+  res.send({ data: result });
 }
 
-function getWorkflowById(req: Request, res: Response) {
-  // DB call to get workflows by id handled by a service
-  res.send("Workflows by id");
+async function getWorkflowById(req: Request, res: Response) {
+  const id = req.params.id;
+  const result = await workflowService.getWorkflowById(id);
+  res.send({ data: result });
 }
 
-export default { getAllWorkflows, getWorkflowById };
+async function newWorkflow(req: Request, res: Response) {
+  const result = await workflowService.newWorkflow(req.body);
+  res.send({ data: result });
+}
+
+export default { getAllWorkflows, getWorkflowById, newWorkflow };

@@ -4,14 +4,10 @@ import workflowController from "../../controllers/workflows";
 
 // Use controllers to get the required response
 
-router.get("/", (req, res) => {
-  const result = workflowController.getAllWorkflows(req, res);
-  res.send(result);
-});
+router.get("/", workflowController.getAllWorkflows);
 
-router.get(["/", "/:id"], (req, res) => {
-  const result = workflowController.getWorkflowById(req, res);
-  res.send(result);
-});
+router.post(["/", "/:id"], workflowController.newWorkflow);
+
+router.get(["/", "/:id"], workflowController.getWorkflowById);
 
 export default router;
