@@ -4,7 +4,6 @@ import { eq } from "drizzle-orm";
 
 async function getAllWorkflows() {
   const result = await db.select().from(workflowTable);
-  console.log(result);
   return result;
 }
 
@@ -17,9 +16,27 @@ async function getWorkflowById(id: string) {
 }
 
 async function newWorkflow(data: any) {
-  const insertData = { id: data.id, name: data.name, flowData: {} };
+  console.log("data", data);
+  const insertData = {
+    id: data.id,
+    workflow_name: data.name,
+    flowData: data.flowData,
+  };
   const result = await db.insert(workflowTable).values(data);
   return result;
 }
 
-export default { getAllWorkflows, getWorkflowById, newWorkflow };
+async function updateWorkflow(data: any) {
+  const result = await db
+    .update(workflowTable)
+    .set({ flowData: data.workflow.flowData })
+    .where(eq(workflowTable.id, data.workflow.id));
+  return result;
+}
+
+export default {
+  getAllWorkflows,
+  getWorkflowById,
+  newWorkflow,
+  updateWorkflow,
+};

@@ -8,6 +8,8 @@ router.get("/", workflowController.getAllWorkflows);
 
 router.post(["/", "/:id"], workflowController.newWorkflow);
 
+router.put(["/", "/:id"], workflowController.updateWorkflow);
+
 router.get(["/", "/:id"], workflowController.getWorkflowById);
 
 export default router;

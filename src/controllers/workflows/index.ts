@@ -17,4 +17,14 @@ async function newWorkflow(req: Request, res: Response) {
   res.send({ data: result });
 }
 
-export default { getAllWorkflows, getWorkflowById, newWorkflow };
+async function updateWorkflow(req: Request, res: Response) {
+  const result = await workflowService.updateWorkflow(req.body);
+  res.send({ data: result });
+}
+
+export default {
+  getAllWorkflows,
+  getWorkflowById,
+  newWorkflow,
+  updateWorkflow,
+};
